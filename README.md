@@ -17,7 +17,7 @@ $ sudo dmesg | grep ish_ipc
 
 ```
 
-This should allow some extra sensors to work, like tablet mode detection.
+This should allow some extra sensors to work, like the accelerometers for the tablet mode and autorotation section below.
 
 ## Audio
 No audio output through speakers or 3.5mm jack out of the box currently.
@@ -57,3 +57,18 @@ lrwxrwxrwx. 1 root root 0 Oct 25 15:58 i2c-WDHT1F01:00 -> ../../../devices/pci00
 My resulting script from following that guide is in internal_speakers_i2c.sh
 
 I currently don't get output from the headphone jack, although it seems like version sof-firmware is available, but likely just not available in Fedora (42) yet to enable this.
+
+## Tablet mode and auto rotate
+Make sure you have installed iio-sensor-proxy (e.g. `sudo dnf install iio-sensor-proxy`) and the ISH firmware is being loaded properly. Accelerometer orientation should now change when you tilt the laptop in different directions (https://gitlab.freedesktop.org/hadess/iio-sensor-proxy/ for more information).
+
+I am using KDE6 on Wayland and so auto rotations works right awayw
+
+https://github.com/asus-linux-drivers/asus-fliplock-driver works to run commands on KEY_PROG2 events that indicate flip transitions.
+
+To get auto touch mode working in KDE6, I added commented out all the other commands in `conf/default.py` and added `su [username] bash -c '/opt/tp3607-linux/toggle_touch_mode.py on/off'`.
+
+
+## Other useful software
+https://github.com/intel/intel-lpmd
+
+Disabled tuned or others before enabling tlp

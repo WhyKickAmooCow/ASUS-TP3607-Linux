@@ -10,3 +10,5 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now asus-tp3607-speaker-i2c-setup.service
 
 sudo cp ish/ish_lnlm.bin /usr/lib/firmware/intel/ish/ish_lnlm.bin
+
+sudo cp toggle_touch_mode.py /opt/tp3607-linux/toggle_touch_mode.py
